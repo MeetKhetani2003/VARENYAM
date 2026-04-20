@@ -7,10 +7,10 @@ export async function generateMetadata({ params }) {
   const { id } = await params;
   const service = services.find((s) => s.id === id);
 
-  if (!service) return { title: "Service Not Found" };
+  if (!service) return { title: "Treatment Not Found" };
 
   return {
-    title: service.title,
+    title: `${service.title} | Treatment`,
     description: service.longDesc.substring(0, 160),
     openGraph: {
       title: `${service.title} | Varenyam Neurocare`,
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function ServiceDetailPage({ params }) {
+export default async function TreatmentDetailPage({ params }) {
   const { id } = await params;
   const service = services.find((s) => s.id === id);
 
