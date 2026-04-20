@@ -1,93 +1,78 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { MoveRight } from "lucide-react";
-import Magnetic from "./Magnetic";
 import Link from "next/link";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const Hero = () => {
   const containerRef = useRef(null);
-  const visualRef = useRef(null);
+  const imgRef = useRef(null);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      const ctx = gsap.context(() => {
-        // Snappier entrance - duration reduced to 0.8s
-        const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 0.8 } });
-        
-        tl.fromTo(".hero-line", 
-          { y: 60, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 0.05 }
-        )
-        .fromTo(".hero-sub", 
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0 },
-          "-=0.5"
-        )
-        .fromTo(".hero-visual", 
-          { scale: 1.05, opacity: 0, filter: "blur(10px)" },
-          { scale: 1, opacity: 1, filter: "blur(0px)", duration: 1 },
-          "-=0.6"
-        );
+  useLayoutEffect(() => {
+    if (!containerRef.current) return;
 
-        if (visualRef.current) {
-          gsap.to(visualRef.current, {
-            yPercent: 15,
-            ease: "none",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: true
-            }
-          });
-        }
-      }, containerRef);
-      
-      ScrollTrigger.refresh();
-      return () => ctx.revert();
-    }
+    const ctx = gsap.context(() => {
+      gsap.fromTo(".hero-line", 
+        { y: 5, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, ease: "power1.out" }
+      );
+
+      if (imgRef.current) {
+        gsap.to(imgRef.current, {
+          yPercent: 10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.5,
+          }
+        });
+      }
+    }, containerRef);
+    
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="relative pt-48 pb-20 overflow-hidden bg-white">
+    <section ref={containerRef} className="relative pt-32 pb-4 overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-24 items-center">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
           <div>
-            <div className="hero-line flex items-center gap-4 mb-10 text-brand-primary">
-              <div className="w-10 h-[1px] bg-brand-primary" />
-              <span className="text-[10px] uppercase tracking-[0.4em] font-medium">Neurocare Center</span>
+            <div className="hero-line flex items-center gap-4 mb-6 text-brand-primary">
+              <div className="w-8 h-[1px] bg-brand-primary" />
+              <span className="text-[10px] uppercase tracking-[0.4em] font-semibold">Neurocare Centre</span>
             </div>
             
-            <h1 className="hero-line text-5xl md:text-7xl lg:text-[5rem] font-medium leading-[1.1] mb-12 tracking-tighter text-brand-dark">
-              Restoring <span className="text-gradient">Movement</span>, <br />
+            <h1 className="hero-line text-4xl md:text-6xl font-semibold leading-[1.2] mb-8 tracking-tighter text-brand-dark">
+              Restoring <span className="text-brand-primary">Movement</span>, <br />
               Rebuilding Lives.
             </h1>
             
-            <p className="hero-sub text-lg text-slate-400 font-light leading-relaxed mb-16 max-w-xl">
+            <p className="hero-line text-base text-slate-500 font-normal leading-relaxed mb-10 max-w-xl">
               Varenyam provides evidence-based precision neurorehabilitation with a patient-centered approach to help you regain functional independence.
             </p>
             
-            <div className="hero-sub flex flex-wrap gap-10">
-              <Link href="/services" className="inline-flex items-center gap-4 group">
-                <span className="w-14 h-14 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-brand-dark group-hover:text-white transition-all duration-500">
-                  <MoveRight size={20} />
-                </span>
-                <span className="text-xs uppercase tracking-widest text-brand-dark font-medium">Explore Treatments</span>
+            <div className="hero-line flex flex-wrap gap-6">
+              <Link href="/services" className="inline-flex items-center gap-3 bg-brand-dark text-white px-8 py-3 rounded-lg text-[10px] uppercase tracking-widest font-semibold hover:bg-brand-primary transition-all">
+                Explore Treatments <MoveRight size={14} />
               </Link>
             </div>
           </div>
 
-          <div className="hero-sub relative">
-            <div ref={visualRef} className="hero-visual relative aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl bg-slate-50">
+          <div className="hero-line relative">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-sm border border-slate-100 bg-slate-50">
               <img 
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000" 
-                alt="Varenyam Therapy"
-                className="w-full h-full object-cover"
+                ref={imgRef}
+                src="/hero.png" 
+                alt="Modern Neurorehabilitation"
+                className="w-full h-[120%] object-cover absolute top-[-10%]"
               />
             </div>
           </div>

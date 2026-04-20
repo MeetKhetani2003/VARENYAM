@@ -14,17 +14,16 @@ const WhyChooseUs = () => {
     if (containerRef.current) {
       const ctx = gsap.context(() => {
         gsap.fromTo(".reveal-item", 
-          { y: 30, opacity: 0 },
+          { y: 10, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1,
-            stagger: 0.1,
-            ease: "power2.out",
+            duration: 0.4,
+            stagger: 0.05,
+            ease: "power1.out",
             scrollTrigger: {
               trigger: containerRef.current,
-              start: "top 85%",
-              toggleActions: "play none none none"
+              start: "top 95%",
             }
           }
         );
@@ -40,34 +39,33 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section ref={containerRef} className="py-24 bg-white border-y border-slate-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+    <section ref={containerRef} className="py-1 px-6 bg-white">
+      <div className="max-w-7xl mx-auto border-t border-slate-50 pt-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="reveal-item">
-            <h2 className="text-xs uppercase tracking-[0.3em] text-brand-primary mb-6 font-medium">Why Choose Us</h2>
-            <h3 className="text-3xl md:text-5xl font-medium text-brand-dark mb-8 tracking-tight">
-              Evidence-Based <br />
-              <span className="text-gradient">Precision Care.</span>
+            <h2 className="text-[10px] uppercase tracking-[0.2em] text-brand-primary mb-4 font-medium">Why Choose Us</h2>
+            <h3 className="text-2xl md:text-3xl font-medium text-brand-dark mb-4 tracking-tight">
+              Evidence-Based <span className="text-gradient">Precision Care.</span>
             </h3>
-            <p className="text-base text-slate-500 font-light leading-relaxed mb-12 max-w-lg">
-              Our multidisciplinary approach combines the latest scientific research with compassionate care to ensure the best possible outcomes for our patients.
+            <p className="text-sm text-brand-dark/60 font-light leading-relaxed mb-8 max-w-lg">
+              Our multidisciplinary approach combines the latest scientific research with compassionate care.
             </p>
             
-            <div className="grid grid-cols-3 gap-8">
+            <div className="grid grid-cols-3 gap-4">
               {stats.map((stat, i) => (
                 <div key={i}>
-                  <p className="text-2xl font-medium text-brand-dark mb-1">{stat.val}</p>
-                  <p className="text-[10px] uppercase tracking-widest text-slate-400">{stat.label}</p>
+                  <p className="text-xl font-medium text-brand-dark mb-1">{stat.val}</p>
+                  <p className="text-[8px] uppercase tracking-widest text-slate-400">{stat.label}</p>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="reveal-item relative">
-            <div className="aspect-square rounded-[3rem] bg-slate-50 flex items-center justify-center p-12 overflow-hidden border border-slate-100 shadow-sm">
-              <ShieldCheck size={120} className="text-brand-primary opacity-5" />
-              <div className="absolute inset-0 flex items-center justify-center p-20 text-center">
-                <p className="text-lg text-slate-400 font-light italic leading-relaxed">
+            <div className="aspect-[16/9] rounded-2xl bg-brand-muted/30 flex items-center justify-center p-8 overflow-hidden border border-slate-100">
+              <ShieldCheck size={80} className="text-brand-primary opacity-5" />
+              <div className="absolute inset-0 flex items-center justify-center p-8 text-center">
+                <p className="text-base text-brand-dark/50 font-light italic leading-relaxed">
                   "Dedicated to restoring movement and independence for every patient we serve."
                 </p>
               </div>

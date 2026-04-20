@@ -1,16 +1,19 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Contact from "@/components/Contact";
 import Marquee from "@/components/Marquee";
 import { services } from "@/data/services";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { MoveRight, ChevronRight, Activity, Baby, Target, Zap, ShieldCheck, Hand, Accessibility, Users } from "lucide-react";
+import { MoveRight, Activity, Baby, Target, Zap, ShieldCheck, Hand, Accessibility, Users } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const IconMap = {
   Activity, Baby, Target, Zap, ShieldCheck, Hand, Accessibility, Users
@@ -19,118 +22,162 @@ const IconMap = {
 export default function ServicesPage() {
   const containerRef = useRef(null);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      const ctx = gsap.context(() => {
-        // Snappy Hero Reveal - 0.7s
-        gsap.fromTo(".reveal-up", 
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.7,
-            stagger: 0.05,
-            ease: "power2.out",
-          }
-        );
+  useLayoutEffect(() => {
+    if (!containerRef.current) return;
 
-        // Faster List Reveal - 0.6s
-        gsap.fromTo(".service-row", 
-          { y: 20, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            stagger: 0.04,
-            ease: "power2.out",
+    const ctx = gsap.context(() => {
+      // Hero Entrance
+      gsap.fromTo(".hero-reveal", 
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: "power2.out" }
+      );
+
+      // Section reveals with staggered child elements
+      services.forEach((service) => {
+        const selector = `.service-section-${service.id}`;
+        if (document.querySelector(selector)) {
+          const tl = gsap.timeline({
             scrollTrigger: {
-              trigger: ".services-list",
-              start: "top 95%",
-              toggleActions: "play none none none"
+              trigger: selector,
+              start: "top 90%",
             }
-          }
-        );
-      }, containerRef);
-      
-      ScrollTrigger.refresh();
-      return () => ctx.revert();
-    }
+          });
+
+          tl.fromTo(`${selector} .service-img`, 
+            { scale: 1.05, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.6, ease: "power2.out" }
+          )
+          .fromTo(`${selector} .service-content`, 
+            { x: 20, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.5, ease: "power2.out" },
+            "-=0.4"
+          );
+        }
+      });
+    }, containerRef);
+    
+    const timer = setTimeout(() => { ScrollTrigger.refresh(); }, 100);
+    return () => { ctx.revert(); clearTimeout(timer); };
   }, []);
 
   return (
     <main ref={containerRef} className="min-h-screen bg-white">
       <Navbar />
       
-      {/* Services Hero */}
-      <div className="pt-48 pb-32 px-6 bg-slate-50/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-3xl reveal-up">
-            <h2 className="text-xs uppercase tracking-[0.3em] text-brand-primary mb-6 font-medium">Expertise & Treatments</h2>
-            <h1 className="text-4xl md:text-7xl font-medium text-brand-dark mb-8 tracking-tighter leading-[1.1]">
-              A Path to <span className="text-gradient">Functional Independence.</span>
-            </h1>
-            <p className="text-lg text-slate-500 font-light max-w-xl leading-relaxed">
-              We provide 10 specialized neurorehabilitation services tailored for complex neurological conditions in both adults and children.
-            </p>
-          </div>
+      {/* Premium Minimalist Hero - Normalized Font Size */}
+      <section className="relative pt-48 pb-12 overflow-hidden">
+        <div className="absolute top-40 left-0 w-full text-center select-none pointer-events-none opacity-[0.02]">
+          <span className="text-[15vw] font-bold text-brand-dark tracking-tighter">EXCELLENCE</span>
         </div>
-      </div>
-
-      {/* Structured Services List */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto services-list">
-          <div className="grid gap-4">
-            {services.map((service, i) => {
-              const Icon = IconMap[service.icon] || Activity;
-              return (
-                <Link 
-                  key={service.id}
-                  href={`/services/${service.id}`}
-                  className="service-row group flex flex-col md:flex-row md:items-center justify-between p-10 md:p-12 bg-white border border-slate-100 rounded-[2.5rem] hover:bg-brand-dark hover:border-brand-dark transition-all duration-500"
-                >
-                  <div className="flex items-center gap-8 mb-8 md:mb-0">
-                    <span className="text-[10px] uppercase tracking-widest text-slate-300 group-hover:text-white/40">0{i+1}</span>
-                    <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-brand-primary group-hover:bg-white/10 group-hover:text-brand-accent transition-colors">
-                      <Icon size={28} />
-                    </div>
-                    <div>
-                      <h3 className="text-xl md:text-2xl font-medium text-brand-dark group-hover:text-white transition-colors mb-2">
-                        {service.title}
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {service.tags.slice(0, 3).map((tag, j) => (
-                          <span key={j} className="text-[9px] uppercase tracking-widest text-slate-400 group-hover:text-white/40">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-12">
-                    <p className="hidden lg:block text-sm text-slate-400 group-hover:text-white/60 font-light max-w-[300px]">
-                      {service.shortDesc}
-                    </p>
-                    <div className="w-12 h-12 rounded-full border border-slate-100 flex items-center justify-center text-brand-dark group-hover:border-white/20 group-hover:text-white transition-all group-hover:bg-white/10">
-                      <MoveRight size={20} />
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row items-end justify-between gap-10">
+            <div className="max-w-3xl">
+              <div className="hero-reveal flex items-center gap-4 mb-6 text-brand-primary">
+                <div className="w-12 h-[1px] bg-brand-primary" />
+                <span className="text-[10px] uppercase tracking-[0.5em] font-semibold">Our Expertise</span>
+              </div>
+              <h1 className="hero-reveal text-4xl md:text-6xl font-semibold text-brand-dark tracking-tighter leading-[1.2] mb-8">
+                Precision <br />
+                <span className="text-brand-primary italic font-medium">Rehabilitation.</span>
+              </h1>
+            </div>
+            <div className="hero-reveal pb-4">
+              <p className="text-sm text-slate-400 font-normal max-w-xs leading-relaxed border-l border-brand-primary/20 pl-6">
+                Ten specialized clinical programs engineered for neurological recovery and functional independence.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto bg-slate-50 border border-slate-100 rounded-[4rem] p-12 md:p-24 text-center">
-          <h2 className="text-3xl md:text-5xl font-medium text-brand-dark mb-8 tracking-tight">Need a Clinical Consultation?</h2>
-          <p className="text-slate-500 font-light max-w-xl mx-auto mb-12 leading-relaxed">
-            Every recovery is unique. Speak with our clinical experts to determine the best treatment roadmap for you or your loved ones.
+      {/* Modern Alternating Sections with Layered UI */}
+      <div className="space-y-1">
+        {services.map((service, i) => {
+          const Icon = IconMap[service.icon] || Activity;
+          const isEven = i % 2 === 0;
+
+          return (
+            <section 
+              key={service.id} 
+              className={cn(
+                `service-section-${service.id} py-2 px-6`,
+                isEven ? "bg-white" : "bg-brand-muted/20"
+              )}
+            >
+              <div className="max-w-7xl mx-auto border-t border-slate-50 pt-10 pb-8">
+                <div className={cn(
+                  "flex flex-col lg:flex-row items-center gap-16",
+                  !isEven && "lg:flex-row-reverse"
+                )}>
+                  <div className="w-full lg:w-3/5 service-img relative group">
+                    <div className="absolute -inset-4 bg-brand-primary/5 rounded-2xl group-hover:bg-brand-primary/10 transition-all duration-500" />
+                    <div className="relative aspect-[16/9] rounded-xl overflow-hidden shadow-sm">
+                      <img 
+                        src={service.image} 
+                        alt={service.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="w-full lg:w-2/5 service-content">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-12 h-12 bg-brand-dark text-white rounded-lg flex items-center justify-center shadow-lg">
+                        <Icon size={20} />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-[10px] text-brand-primary font-semibold uppercase tracking-widest leading-none">Varenyam Clinical</span>
+                        <span className="text-[10px] text-slate-300 font-medium uppercase tracking-widest mt-1">Specialization 0{i+1}</span>
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-2xl md:text-3xl font-semibold text-brand-dark mb-6 tracking-tight">
+                      {service.title}
+                    </h3>
+                    
+                    <p className="text-sm text-slate-500 font-normal leading-relaxed mb-8">
+                      {service.longDesc}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-2 mb-10">
+                      {service.tags.map((tag, j) => (
+                        <span key={j} className="text-[9px] uppercase tracking-widest px-4 py-1.5 bg-white border border-slate-100 text-brand-secondary font-semibold rounded-lg">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <Link 
+                      href={`/services/${service.id}`}
+                      className="inline-flex items-center gap-4 group text-brand-dark hover:text-brand-primary transition-all"
+                    >
+                      <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all">
+                        <MoveRight size={16} />
+                      </div>
+                      <span className="text-[10px] uppercase tracking-[0.2em] font-semibold">View Case Study</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
+      <section className="py-2 px-6">
+        <div className="max-w-7xl mx-auto bg-brand-dark rounded-[2.5rem] p-16 md:p-24 text-center text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl -mr-32 -mt-32" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-accent/5 rounded-full blur-3xl -ml-32 -mb-32" />
+          
+          <h2 className="text-2xl md:text-4xl font-semibold mb-6 text-white tracking-tight relative z-10">
+            Ready to Begin <br /> Your <span className="text-brand-primary italic">Recovery?</span>
+          </h2>
+          <p className="text-slate-400 font-normal max-w-xl mx-auto mb-12 text-base relative z-10">
+            Consult with our multidisciplinary team to build a precision roadmap for your independence.
           </p>
-          <Link href="/contact" className="inline-flex items-center gap-4 bg-brand-dark text-white px-10 py-4 rounded-full text-xs uppercase tracking-[0.2em] hover:bg-brand-primary transition-all shadow-xl shadow-brand-dark/10">
-            Book Appointment <ChevronRight size={16} />
+          <Link href="/contact" className="inline-flex items-center gap-4 bg-brand-primary text-white px-10 py-4 rounded-xl text-[10px] uppercase tracking-[0.3em] font-semibold hover:bg-white hover:text-brand-dark transition-all relative z-10 shadow-xl shadow-brand-primary/20">
+            Schedule Consultation <MoveRight size={14} />
           </Link>
         </div>
       </section>

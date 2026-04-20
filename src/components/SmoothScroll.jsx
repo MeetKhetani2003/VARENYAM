@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -12,54 +12,45 @@ const SmoothScroll = ({ children }) => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
+    // Optimized Lenis Settings for Zero Lag
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.0, // Snappier
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1,
-      lerp: 0.1,
+      wheelMultiplier: 1.1, // Slightly faster response
+      lerp: 0.12, // More reactive
     });
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
-    gsap.ticker.lagSmoothing(0);
-
-    // Refresh ScrollTrigger when images or fonts load
-    const refresh = () => {
-      ScrollTrigger.refresh();
+    const raf = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     };
 
-    window.addEventListener("load", refresh);
-    
+    requestAnimationFrame(raf);
+
+    // Dynamic ScrollTrigger Refresh
     const resizeObserver = new ResizeObserver(() => {
       ScrollTrigger.refresh();
     });
     resizeObserver.observe(document.body);
 
-    // Initial refresh after a short delay to ensure DOM is settled
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500);
+    const timer = setTimeout(() => ScrollTrigger.refresh(), 500);
 
     return () => {
       lenis.destroy();
       resizeObserver.disconnect();
-      gsap.ticker.remove(lenis.raf);
-      window.removeEventListener("load", refresh);
       clearTimeout(timer);
     };
   }, []);
 
-  // Force refresh on route change
+  // Force reset and refresh on navigation
   useEffect(() => {
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
       window.scrollTo(0, 0);
-    }, 100);
+    }, 50);
     return () => clearTimeout(timer);
   }, [pathname]);
 

@@ -135,7 +135,7 @@ export default function ServiceDetailPage() {
       {/* Dynamic CTA */}
       <section className="pb-32 px-6 reveal-scroll">
         <div className="max-w-7xl mx-auto bg-brand-dark p-12 md:p-24 rounded-[4rem] text-white text-center">
-          <h3 className="text-3xl md:text-5xl font-medium mb-8">Ready to Start?</h3>
+          <h3 className="text-3xl md:text-5xl text-slate-50 font-medium mb-8">Ready to Start?</h3>
           <p className="text-slate-400 font-light max-w-xl mx-auto mb-12 leading-relaxed">
             Take the first step towards recovery with a comprehensive clinical assessment for {service.title}.
           </p>
