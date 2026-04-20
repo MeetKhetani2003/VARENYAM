@@ -52,7 +52,7 @@ const Navbar = () => {
     <>
       <nav
         className={cn(
-          "fixed top-0 left-0 w-full z-[100] transition-all duration-300 px-4 md:px-10",
+          "fixed top-0 left-0 w-full z-[110] transition-all duration-300 px-4 md:px-10",
           scrolled ? "py-2" : "py-4 md:py-6"
         )}
       >
@@ -118,12 +118,7 @@ const Navbar = () => {
         "fixed inset-0 bg-white z-[105] transition-all duration-500 md:hidden flex flex-col",
         mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none translate-x-full"
       )}>
-        <div className="p-8 border-b border-slate-50 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
-            <span className="text-sm font-semibold tracking-tighter text-brand-dark">VARENYAM</span>
-          </div>
-        </div>
+        <div className="h-20 border-b border-slate-50 flex-shrink-0" /> {/* Spacer for the fixed navbar */}
 
         <div className="flex-1 flex flex-col justify-center px-10 gap-10">
           {navLinks.map((link, i) => (

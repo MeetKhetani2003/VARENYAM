@@ -2,6 +2,7 @@
 
 import React, { useLayoutEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
+import ContactStrap from "@/components/ContactStrap";
 import Contact from "@/components/Contact";
 import Marquee from "@/components/Marquee";
 import { services } from "@/data/services";
@@ -183,6 +184,7 @@ export default function ServicesPage() {
       </section>
 
       <Marquee />
+      <ContactStrap />
       <Contact />
     </main>
   );

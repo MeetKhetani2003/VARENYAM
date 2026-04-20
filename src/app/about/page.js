@@ -4,6 +4,7 @@ import React, { useLayoutEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import About from "@/components/About";
 import Marquee from "@/components/Marquee";
+import ContactStrap from "@/components/ContactStrap";
 import Contact from "@/components/Contact";
 import { Target, Eye, Heart } from "lucide-react";
 import { gsap } from "gsap";
@@ -98,6 +99,7 @@ export default function AboutPage() {
 
       <About />
       <Marquee />
+      <ContactStrap />
       <Contact />
     </main>
   );

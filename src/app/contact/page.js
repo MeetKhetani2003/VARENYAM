@@ -2,6 +2,7 @@
 
 import React, { useLayoutEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
+import ContactStrap from "@/components/ContactStrap";
 import Contact from "@/components/Contact";
 import Marquee from "@/components/Marquee";
 import { Phone, Mail, Send, MapPin } from "lucide-react";
@@ -142,6 +143,7 @@ export default function ContactPage() {
       </div>
 
       <Marquee />
+      <ContactStrap />
       <Contact />
     </main>
   );

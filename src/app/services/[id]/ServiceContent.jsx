@@ -2,6 +2,7 @@
 
 import React, { useLayoutEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
+import ContactStrap from "@/components/ContactStrap";
 import Contact from "@/components/Contact";
 import Marquee from "@/components/Marquee";
 import { gsap } from "gsap";
@@ -160,6 +161,7 @@ export default function ServiceContent({ service }) {
       </section>
 
       <Marquee />
+      <ContactStrap />
       <Contact />
     </main>
   );
