@@ -40,7 +40,7 @@ const Contact = () => {
           <div className="lg:col-span-1">
             <h4 className="text-[11px] uppercase tracking-[0.3em] font-bold text-brand-primary mb-8">Navigation</h4>
             <ul className="space-y-4">
-              {["Home", "About", "Services", "Contact"].map((item) => (
+              {["Home", "About", "Treatments", "Contact"].map((item) => (
                 <li key={item}>
                   <Link href={item === "Home" ? "/" : `/${item.toLowerCase()}`} className="text-[13px] text-slate-500 hover:text-brand-primary transition-colors flex items-center gap-2 group">
                     <span className="w-0 h-[1px] bg-brand-primary group-hover:w-4 transition-all" />

@@ -51,7 +51,7 @@ const ServicesPreview = () => {
               Specialized Care <span className="text-gradient">Designed for Recovery.</span>
             </h3>
           </div>
-          <Link href="/services" className="reveal-up text-[10px] uppercase tracking-[0.2em] text-brand-primary hover:text-brand-dark transition-colors flex items-center gap-2 pb-1 border-b border-brand-primary/20">
+          <Link href="/treatments" className="reveal-up text-[10px] uppercase tracking-[0.2em] text-brand-primary hover:text-brand-dark transition-colors flex items-center gap-2 pb-1 border-b border-brand-primary/20">
             View All <ChevronRight size={12} />
           </Link>
         </div>
@@ -62,7 +62,7 @@ const ServicesPreview = () => {
             return (
               <Link 
                 key={service.id}
-                href={`/services/${service.id}`}
+                href={`/treatments/${service.id}`}
                 className="reveal-up group p-6 bg-white border rounded-md  hover:bg-brand-muted/30 transition-all duration-300 hover:shadow-xl hover:shadow-brand-primary/30 border-brand-primary"
               >
                 <div className="w-8 h-8 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary mb-4 group-hover:bg-brand-primary group-hover:text-white transition-all">

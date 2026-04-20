@@ -59,7 +59,7 @@ export default function ServiceContent({ service }) {
           <nav className="hero-reveal flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-12">
             <Link href="/" className="hover:text-brand-primary transition-colors">Home</Link>
             <ChevronRight size={12} className="text-slate-300" />
-            <Link href="/services" className="hover:text-brand-primary transition-colors">Services</Link>
+            <Link href="/treatments" className="hover:text-brand-primary transition-colors">Treatments</Link>
             <ChevronRight size={12} className="text-slate-300" />
             <span className="text-brand-primary">Case Study</span>
           </nav>
@@ -68,7 +68,7 @@ export default function ServiceContent({ service }) {
             <div className="hero-reveal">
               <div className="flex items-center gap-4 mb-6 text-brand-primary">
                 <div className="w-12 h-[1px] bg-brand-primary" />
-                <span className="text-[11px] uppercase tracking-[0.4em] font-semibold">Service Detail</span>
+                <span className="text-[11px] uppercase tracking-[0.4em] font-semibold">Treatment Detail</span>
               </div>
               <h1 className="text-4xl md:text-6xl font-semibold text-brand-dark mb-8 tracking-tighter leading-[1.1]">
                 {service.title.split(' ')[0]} <br />

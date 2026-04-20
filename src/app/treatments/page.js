@@ -41,6 +41,8 @@ export default function ServicesPage() {
             scrollTrigger: {
               trigger: selector,
               start: "top 90%",
+              // Removed potential sticky issues by ensuring no pinning is active
+              toggleActions: "play none none none"
             }
           });
 
@@ -57,8 +59,22 @@ export default function ServicesPage() {
       });
     }, containerRef);
     
-    const timer = setTimeout(() => { ScrollTrigger.refresh(); }, 100);
-    return () => { ctx.revert(); clearTimeout(timer); };
+    // Robust Refresh Cycle for dynamic content/images
+    const refresh = () => ScrollTrigger.refresh();
+    
+    window.addEventListener("load", refresh);
+    const timers = [
+      setTimeout(refresh, 100),
+      setTimeout(refresh, 500),
+      setTimeout(refresh, 1000),
+      setTimeout(refresh, 2000)
+    ];
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("load", refresh);
+      timers.forEach(clearTimeout);
+    };
   }, []);
 
   return (
@@ -150,13 +166,13 @@ export default function ServicesPage() {
                     </div>
 
                     <Link 
-                      href={`/services/${service.id}`}
+                      href={`/treatments/${service.id}`}
                       className="inline-flex items-center gap-4 group text-brand-dark hover:text-brand-primary transition-all"
                     >
                       <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all">
                         <MoveRight size={16} />
                       </div>
-                      <span className="text-[11px] uppercase tracking-[0.2em] font-semibold">View Case Study</span>
+                      <span className="text-[11px] uppercase tracking-[0.2em] font-semibold">View Treatment Detail</span>
                     </Link>
                   </div>
                 </div>

@@ -60,7 +60,7 @@ const Hero = () => {
             </p>
             
             <div className="hero-line flex flex-wrap gap-6">
-              <Link href="/services" className="inline-flex items-center gap-3 bg-brand-dark text-white px-8 py-3 rounded-lg text-[11px] uppercase tracking-widest font-semibold hover:bg-brand-primary transition-all">
+              <Link href="/treatments" className="inline-flex items-center gap-3 bg-brand-dark text-white px-8 py-3 rounded-lg text-[11px] uppercase tracking-widest font-semibold hover:bg-brand-primary transition-all">
                 Explore Treatments <MoveRight size={14} />
               </Link>
             </div>
