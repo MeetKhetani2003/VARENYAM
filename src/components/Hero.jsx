@@ -47,7 +47,7 @@ const Hero = () => {
           <div>
             <div className="hero-line flex items-center gap-4 mb-6 text-brand-primary">
               <div className="w-8 h-[1px] bg-brand-primary" />
-              <span className="text-[10px] uppercase tracking-[0.4em] font-semibold">Neurocare Centre</span>
+              <span className="text-[11px] uppercase tracking-[0.4em] font-semibold">Neurocare Centre</span>
             </div>
             
             <h1 className="hero-line text-4xl md:text-6xl font-semibold leading-[1.2] mb-8 tracking-tighter text-brand-dark">
@@ -55,12 +55,12 @@ const Hero = () => {
               Rebuilding Lives.
             </h1>
             
-            <p className="hero-line text-base text-slate-500 font-normal leading-relaxed mb-10 max-w-xl">
+            <p className="hero-line text-lg text-slate-500 font-normal leading-relaxed mb-10 max-w-xl">
               Varenyam provides evidence-based precision neurorehabilitation with a patient-centered approach to help you regain functional independence.
             </p>
             
             <div className="hero-line flex flex-wrap gap-6">
-              <Link href="/services" className="inline-flex items-center gap-3 bg-brand-dark text-white px-8 py-3 rounded-lg text-[10px] uppercase tracking-widest font-semibold hover:bg-brand-primary transition-all">
+              <Link href="/services" className="inline-flex items-center gap-3 bg-brand-dark text-white px-8 py-3 rounded-lg text-[11px] uppercase tracking-widest font-semibold hover:bg-brand-primary transition-all">
                 Explore Treatments <MoveRight size={14} />
               </Link>
             </div>

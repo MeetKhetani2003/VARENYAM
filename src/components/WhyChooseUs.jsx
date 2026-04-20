@@ -44,7 +44,7 @@ const WhyChooseUs = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="reveal-item">
             <h2 className="text-[10px] uppercase tracking-[0.2em] text-brand-primary mb-4 font-medium">Why Choose Us</h2>
-            <h3 className="text-2xl md:text-3xl font-medium text-brand-dark mb-4 tracking-tight">
+            <h3 className="text-2xl md:text-4xl font-medium text-brand-dark mb-4 tracking-tight">
               Evidence-Based <span className="text-gradient">Precision Care.</span>
             </h3>
             <p className="text-sm text-brand-dark/60 font-light leading-relaxed mb-8 max-w-lg">

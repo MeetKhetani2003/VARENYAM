@@ -1,76 +1,98 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import About from "@/components/About";
 import Marquee from "@/components/Marquee";
 import Contact from "@/components/Contact";
 import { Target, Eye, Heart } from "lucide-react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function AboutPage() {
   const containerRef = useRef(null);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      const ctx = gsap.context(() => {
-        gsap.fromTo(".reveal", 
-          { y: 5, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.3, stagger: 0.05 }
-        );
-      }, containerRef);
-      return () => ctx.revert();
-    }
+  useLayoutEffect(() => {
+    if (!containerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(".hero-reveal", 
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: "power2.out" }
+      );
+
+      gsap.fromTo(".mission-card", 
+        { y: 20, opacity: 0 },
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 0.6, 
+          stagger: 0.1, 
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".mission-grid",
+            start: "top 90%",
+          }
+        }
+      );
+    }, containerRef);
+    
+    return () => ctx.revert();
   }, []);
 
   return (
     <main ref={containerRef} className="min-h-screen bg-white">
       <Navbar />
       
-      {/* About Hero - Matching Home/Services Style */}
-      <div className="pt-32 pb-4 px-6 bg-brand-muted/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-3xl reveal">
-            <h2 className="text-[10px] uppercase tracking-[0.3em] text-brand-primary mb-4 font-semibold">Our Story</h2>
-            <h1 className="text-3xl md:text-5xl font-semibold text-brand-dark mb-4 tracking-tighter">
-              About <span className="text-brand-primary">Varenyam.</span>
-            </h1>
-            <p className="text-base text-slate-500 font-normal max-w-xl">
-              A center dedicated to evidence-based neurorehabilitation and pediatric excellence, where precision meets empathy.
-            </p>
+      {/* Premium About Hero */}
+      <section className="relative pt-48 pb-12 overflow-hidden">
+        <div className="absolute top-40 left-0 w-full text-center select-none pointer-events-none opacity-[0.02]">
+          <span className="text-[15vw] font-bold text-brand-dark tracking-tighter uppercase">Our Story</span>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row items-end justify-between gap-10">
+            <div className="max-w-3xl">
+              <div className="hero-reveal flex items-center gap-4 mb-6 text-brand-primary">
+                <div className="w-12 h-[1px] bg-brand-primary" />
+                <span className="text-[11px] uppercase tracking-[0.5em] font-semibold">About Varenyam</span>
+              </div>
+              <h1 className="hero-reveal text-4xl md:text-6xl font-semibold text-brand-dark tracking-tighter leading-[1.2] mb-8">
+                Compassion Meets <br />
+                <span className="text-brand-primary italic font-medium">Precision.</span>
+              </h1>
+            </div>
+            <div className="hero-reveal pb-4">
+              <p className="text-[12.5px] text-slate-400 font-normal max-w-xs leading-relaxed border-l border-brand-primary/20 pl-6">
+                A center dedicated to evidence-based neurorehabilitation and pediatric excellence.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="py-2 px-6">
+      {/* Structured Mission/Vision/Values */}
+      <div className="py-2 px-6 mission-grid">
         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-1">
-          <div className="reveal p-8 bg-white border border-slate-50">
-            <div className="w-10 h-10 bg-brand-primary/5 rounded-lg flex items-center justify-center text-brand-primary mb-6">
-              <Target size={20} />
+          {[
+            { icon: Target, title: "Our Mission", text: "To provide evidence-based neurorehabilitation with a patient-centered approach, focusing on functional independence." },
+            { icon: Eye, title: "Our Vision", text: "To be the leading center for neurological recovery, where innovation meets empathy to rebuild lives." },
+            { icon: Heart, title: "Our Values", text: "Integrity, Empathy, Scientific Precision, and a deep commitment to the long-term recovery of every patient." }
+          ].map((item, i) => (
+            <div key={i} className="mission-card p-10 bg-white border border-slate-50 group hover:bg-brand-muted/30 transition-all duration-500">
+              <div className="w-12 h-12 bg-brand-dark text-white rounded-lg flex items-center justify-center mb-8 shadow-sm group-hover:bg-brand-primary transition-all">
+                <item.icon size={20} />
+              </div>
+              <h4 className="text-xl font-semibold text-brand-dark mb-4">{item.title}</h4>
+              <p className="text-slate-500 leading-relaxed text-[13px] font-normal">
+                {item.text}
+              </p>
             </div>
-            <h4 className="text-lg font-semibold text-brand-dark mb-3">Our Mission</h4>
-            <p className="text-slate-500 leading-relaxed text-xs font-normal">
-              To provide evidence-based neurorehabilitation with a patient-centered approach, focusing on improving functional independence.
-            </p>
-          </div>
-          <div className="reveal p-8 bg-white border border-slate-50">
-            <div className="w-10 h-10 bg-brand-primary/5 rounded-lg flex items-center justify-center text-brand-primary mb-6">
-              <Eye size={20} />
-            </div>
-            <h4 className="text-lg font-semibold text-brand-dark mb-3">Our Vision</h4>
-            <p className="text-slate-500 leading-relaxed text-xs font-normal">
-              To be the leading center for neurological recovery, where innovation meets empathy to rebuild lives and restore movement.
-            </p>
-          </div>
-          <div className="reveal p-8 bg-white border border-slate-50">
-            <div className="w-10 h-10 bg-brand-primary/5 rounded-lg flex items-center justify-center text-brand-primary mb-6">
-              <Heart size={20} />
-            </div>
-            <h4 className="text-lg font-semibold text-brand-dark mb-3">Our Values</h4>
-            <p className="text-slate-500 leading-relaxed text-xs font-normal">
-              Integrity, Empathy, Scientific Precision, and a deep commitment to the long-term recovery of every patient we serve.
-            </p>
-          </div>
+          ))}
         </div>
       </div>
 

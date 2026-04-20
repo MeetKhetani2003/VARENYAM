@@ -8,8 +8,33 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Varenyam Neurocare Center | Advanced Neurorehabilitation",
-  description: "Evidence-based neurorehabilitation for stroke, cerebral palsy, and pediatric conditions. Restoring movement, rebuilding lives.",
+  title: {
+    default: "Varenyam Neurocare Center | Advanced Neurorehabilitation",
+    template: "%s | Varenyam Neurocare"
+  },
+  description: "Specialized neurorehabilitation center in Ankleshwar providing evidence-based precision care for stroke, SCI, and pediatric conditions. Restoring movement, rebuilding lives.",
+  keywords: ["Neurorehabilitation", "Stroke Recovery", "Ankleshwar Physiotherapy", "Cerebral Palsy Center", "Brain Injury Rehab", "Varenyam Neurocare"],
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    title: "Varenyam Neurocare Center",
+    description: "Expert Neurorehabilitation & Pediatric Care in Ankleshwar.",
+    url: "https://varenyamneuro.com",
+    siteName: "Varenyam Neurocare",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Varenyam Neurocare Center",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
 };
 
 import SmoothScroll from "@/components/SmoothScroll";

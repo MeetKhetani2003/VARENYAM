@@ -75,7 +75,7 @@ const Navbar = () => {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-[10px] uppercase tracking-[0.2em] transition-all duration-300 relative py-1 font-semibold",
+                  "text-[12.5px] uppercase tracking-[0.2em] transition-all duration-300 relative py-1 font-semibold",
                   pathname === link.href ? "text-brand-primary" : "text-brand-dark/60 hover:text-brand-dark"
                 )}
               >
@@ -90,7 +90,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4 relative z-[110]">
             <Link
               href="/contact"
-              className="hidden sm:block bg-brand-primary text-white px-5 py-2 rounded-lg text-[10px] uppercase tracking-[0.2em] font-semibold hover:bg-brand-dark transition-all shadow-sm"
+              className="hidden sm:block bg-brand-primary text-white px-5 py-2 rounded-lg text-[11px] uppercase tracking-[0.2em] font-semibold hover:bg-brand-dark transition-all shadow-sm"
             >
               Book Now
             </Link>
@@ -155,7 +155,7 @@ const Navbar = () => {
           
           <Link
             href="/contact"
-            className="block w-full bg-brand-dark text-white text-center py-4 rounded-xl text-[10px] uppercase tracking-[0.2em] font-semibold"
+            className="block w-full bg-brand-dark text-white text-center py-4 rounded-xl text-[11px] uppercase tracking-[0.2em] font-semibold"
           >
             Book Clinical Consultation
           </Link>

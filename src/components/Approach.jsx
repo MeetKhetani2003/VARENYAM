@@ -53,7 +53,7 @@ const Approach = () => {
             <div className="space-y-1">
               {principles.map((item, i) => (
                 <div key={i} className="flex items-center gap-4 py-4 border-b border-slate-50 group">
-                  <span className="text-[10px] text-brand-primary font-medium">0{i+1}</span>
+                  <span className="text-[12px] text-brand-primary font-medium">0{i+1}</span>
                   <h3 className="text-base font-medium text-brand-dark">{item.title}</h3>
                   <div className="ml-auto">
                     <item.icon size={16} className="text-brand-primary" />

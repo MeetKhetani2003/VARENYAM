@@ -47,7 +47,7 @@ const ServicesPreview = () => {
         <div className="mb-8 flex flex-col md:flex-row justify-between items-end gap-4">
           <div className="max-w-2xl reveal-up">
             <h2 className="text-[10px] uppercase tracking-[0.3em] text-brand-primary mb-2 font-medium">Expertise & Treatments</h2>
-            <h3 className="text-2xl md:text-3xl font-medium text-brand-dark tracking-tight leading-tight">
+            <h3 className="text-2xl md:text-4xl font-medium text-brand-dark tracking-tight leading-tight">
               Specialized Care <span className="text-gradient">Designed for Recovery.</span>
             </h3>
           </div>
@@ -56,19 +56,19 @@ const ServicesPreview = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {services.slice(0, 8).map((service, i) => {
             const Icon = IconMap[service.icon] || Activity;
             return (
               <Link 
                 key={service.id}
                 href={`/services/${service.id}`}
-                className="reveal-up group p-6 bg-white border border-slate-50 hover:bg-brand-muted/30 transition-all duration-300"
+                className="reveal-up group p-6 bg-white border rounded-md  hover:bg-brand-muted/30 transition-all duration-300 hover:shadow-xl hover:shadow-brand-primary/30 border-brand-primary"
               >
                 <div className="w-8 h-8 rounded-lg bg-brand-primary/10 flex items-center justify-center text-brand-primary mb-4 group-hover:bg-brand-primary group-hover:text-white transition-all">
                   <Icon size={16} />
                 </div>
-                <h4 className="text-sm font-medium text-brand-dark mb-2 group-hover:text-brand-primary transition-colors">
+                <h4 className="text-xl font-medium text-brand-dark mb-2 group-hover:text-brand-primary transition-colors">
                   {service.title}
                 </h4>
                 <p className="text-[10px] text-brand-dark/50 font-light leading-relaxed line-clamp-2">

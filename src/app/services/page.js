@@ -75,7 +75,7 @@ export default function ServicesPage() {
             <div className="max-w-3xl">
               <div className="hero-reveal flex items-center gap-4 mb-6 text-brand-primary">
                 <div className="w-12 h-[1px] bg-brand-primary" />
-                <span className="text-[10px] uppercase tracking-[0.5em] font-semibold">Our Expertise</span>
+                <span className="text-[11px] uppercase tracking-[0.5em] font-semibold">Our Expertise</span>
               </div>
               <h1 className="hero-reveal text-4xl md:text-6xl font-semibold text-brand-dark tracking-tighter leading-[1.2] mb-8">
                 Precision <br />
@@ -127,22 +127,22 @@ export default function ServicesPage() {
                         <Icon size={20} />
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-[10px] text-brand-primary font-semibold uppercase tracking-widest leading-none">Varenyam Clinical</span>
-                        <span className="text-[10px] text-slate-300 font-medium uppercase tracking-widest mt-1">Specialization 0{i+1}</span>
+                        <span className="text-[11px] text-brand-primary font-semibold uppercase tracking-widest leading-none">Varenyam Clinical</span>
+                        <span className="text-[11px] text-slate-300 font-medium uppercase tracking-widest mt-1">Specialization 0{i+1}</span>
                       </div>
                     </div>
                     
-                    <h3 className="text-2xl md:text-3xl font-semibold text-brand-dark mb-6 tracking-tight">
+                    <h3 className="text-3xl md:text-4xl font-semibold text-brand-dark mb-6 tracking-tight">
                       {service.title}
                     </h3>
                     
-                    <p className="text-sm text-slate-500 font-normal leading-relaxed mb-8">
+                    <p className="text-base text-slate-500 font-normal leading-relaxed mb-8">
                       {service.longDesc}
                     </p>
                     
                     <div className="flex flex-wrap gap-2 mb-10">
                       {service.tags.map((tag, j) => (
-                        <span key={j} className="text-[9px] uppercase tracking-widest px-4 py-1.5 bg-white border border-slate-100 text-brand-secondary font-semibold rounded-lg">
+                        <span key={j} className="text-[10px] uppercase tracking-widest px-4 py-1.5 bg-white border border-slate-100 text-brand-secondary font-semibold rounded-lg">
                           {tag}
                         </span>
                       ))}
@@ -155,7 +155,7 @@ export default function ServicesPage() {
                       <div className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all">
                         <MoveRight size={16} />
                       </div>
-                      <span className="text-[10px] uppercase tracking-[0.2em] font-semibold">View Case Study</span>
+                      <span className="text-[11px] uppercase tracking-[0.2em] font-semibold">View Case Study</span>
                     </Link>
                   </div>
                 </div>
@@ -170,13 +170,13 @@ export default function ServicesPage() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl -mr-32 -mt-32" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-accent/5 rounded-full blur-3xl -ml-32 -mb-32" />
           
-          <h2 className="text-2xl md:text-4xl font-semibold mb-6 text-white tracking-tight relative z-10">
+          <h2 className="text-3xl md:text-5xl font-semibold mb-6 text-white tracking-tight relative z-10">
             Ready to Begin <br /> Your <span className="text-brand-primary italic">Recovery?</span>
           </h2>
-          <p className="text-slate-400 font-normal max-w-xl mx-auto mb-12 text-base relative z-10">
+          <p className="text-slate-400 font-normal max-w-xl mx-auto mb-12 text-lg relative z-10">
             Consult with our multidisciplinary team to build a precision roadmap for your independence.
           </p>
-          <Link href="/contact" className="inline-flex items-center gap-4 bg-brand-primary text-white px-10 py-4 rounded-xl text-[10px] uppercase tracking-[0.3em] font-semibold hover:bg-white hover:text-brand-dark transition-all relative z-10 shadow-xl shadow-brand-primary/20">
+          <Link href="/contact" className="inline-flex items-center gap-4 bg-brand-primary text-white px-10 py-4 rounded-xl text-[11px] uppercase tracking-[0.3em] font-semibold hover:bg-white hover:text-brand-dark transition-all relative z-10 shadow-xl shadow-brand-primary/20">
             Schedule Consultation <MoveRight size={14} />
           </Link>
         </div>
