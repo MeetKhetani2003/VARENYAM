@@ -13,6 +13,11 @@ const Navbar = () => {
   const progressRef = useRef(null);
   const pathname = usePathname();
 
+  const isActive = (href) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -76,11 +81,11 @@ const Navbar = () => {
                 href={link.href}
                 className={cn(
                   "text-[12.5px] uppercase tracking-[0.2em] transition-all duration-300 relative py-1 font-semibold",
-                  pathname === link.href ? "text-brand-primary" : "text-brand-dark/60 hover:text-brand-dark"
+                  isActive(link.href) ? "text-brand-primary" : "text-brand-dark/60 hover:text-brand-dark"
                 )}
               >
                 {link.name}
-                {pathname === link.href && (
+                {isActive(link.href) && (
                   <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-brand-primary rounded-full" />
                 )}
               </Link>
@@ -127,7 +132,7 @@ const Navbar = () => {
               href={link.href}
               className={cn(
                 "text-3xl font-semibold tracking-tighter transition-all duration-300 flex items-center gap-4",
-                pathname === link.href ? "text-brand-primary" : "text-brand-dark/30"
+                isActive(link.href) ? "text-brand-primary" : "text-brand-dark/30"
               )}
             >
               <span className="text-xs font-medium text-slate-300">0{i+1}</span>

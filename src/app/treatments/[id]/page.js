@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import { services } from "@/data/services";
-import ServiceContent from "./ServiceContent";
+import TreatmentContent from "./TreatmentContent";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -28,5 +28,5 @@ export default async function TreatmentDetailPage({ params }) {
     return notFound();
   }
 
-  return <ServiceContent service={service} />;
+  return <TreatmentContent service={service} />;
 }

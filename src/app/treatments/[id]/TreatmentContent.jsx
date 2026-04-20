@@ -14,7 +14,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export default function ServiceContent({ service }) {
+export default function TreatmentContent({ service }) {
   const containerRef = useRef(null);
 
   useLayoutEffect(() => {
