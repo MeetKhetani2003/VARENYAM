@@ -17,6 +17,7 @@ const SmoothScroll = ({ children }) => {
       duration: 1.0, // Snappier
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      SmoothScroll: true,
       wheelMultiplier: 1.1, // Slightly faster response
       lerp: 0.1, // Much smoother, 'lerped' feel
     });
