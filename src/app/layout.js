@@ -45,7 +45,10 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${poppins.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+    <meta author="MK Digital nexus"/>
+    <meta name="publisher" content="MK Digital nexus"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+       <body className="min-h-full flex flex-col">
         <SmoothScroll>
           {children}
         </SmoothScroll>
