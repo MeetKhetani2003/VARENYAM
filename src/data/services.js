@@ -47,7 +47,7 @@ export const services = [
   {
     id: "whole-body-vibration-therapy",
     title: "Whole Body Vibration Therapy",
-    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=1000",
+    image: "/WholeBodyVib.jpeg",
     shortDesc: "Stimulating muscles through advanced vibration.",
     longDesc: "An innovative therapy using whole-body vibration platforms to stimulate muscle growth, improve circulation, and enhance proprioception in neurological patients.",
     icon: "Activity",
