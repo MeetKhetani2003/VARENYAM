@@ -47,7 +47,7 @@ export const services = [
   {
     id: "whole-body-vibration-therapy",
     title: "Whole Body Vibration Therapy",
-    image: "/WholeBodyVib.jpeg",
+    image: "/bodyvib.jpeg",
     shortDesc: "Stimulating muscles through advanced vibration.",
     longDesc: "An innovative therapy using whole-body vibration platforms to stimulate muscle growth, improve circulation, and enhance proprioception in neurological patients.",
     icon: "Activity",
@@ -65,7 +65,7 @@ export const services = [
   {
     id: "fine-motor-training-splinting",
     title: "Fine Motor Training & Splinting",
-    image: "https://images.unsplash.com/photo-1579126038374-6064e9370f0f?auto=format&fit=crop&q=80&w=1000",
+    image: "/finemotor.jpeg",
     shortDesc: "Precision training and guidance for fine motor skills.",
     longDesc: "Detailed training for fine motor coordination combined with professional guidance on splinting to maintain alignment and functional range of motion.",
     icon: "Target",

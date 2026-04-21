@@ -61,21 +61,23 @@ const mediaAssets = [
 const Gallery = () => {
   const containerRef = useRef(null);
   const [selectedAsset, setSelectedAsset] = useState(null);
+  const [filter, setFilter] = useState("all"); // 'all', 'photos', 'videos'
 
   useEffect(() => {
     if (containerRef.current) {
       const ctx = gsap.context(() => {
-        gsap.from(".gallery-item", {
-          y: 60,
-          opacity: 0,
-          duration: 1.2,
-          stagger: 0.15,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-          },
-        });
+        // Animation for items whenever filter changes
+        gsap.fromTo(".gallery-item", 
+          { y: 30, opacity: 0 },
+          { 
+            y: 0, 
+            opacity: 1, 
+            duration: 0.8, 
+            stagger: 0.1, 
+            ease: "power3.out",
+            overwrite: true
+          }
+        );
 
         gsap.from(".gallery-header", {
           y: 30,
@@ -90,16 +92,23 @@ const Gallery = () => {
       }, containerRef);
       return () => ctx.revert();
     }
-  }, []);
+  }, [filter]);
 
   const isVideo = (path) => {
     return /\.(mp4|webm|ogg|mov)$/i.test(path);
   };
 
+  const filteredAssets = mediaAssets.filter((asset) => {
+    if (filter === "all") return true;
+    if (filter === "photos") return !isVideo(asset);
+    if (filter === "videos") return isVideo(asset);
+    return true;
+  });
+
   return (
-    <section id="gallery" ref={containerRef} className="py-24 px-6 bg-brand-muted relative">
+    <section id="gallery" ref={containerRef} className="py-24 px-6 bg-brand-muted relative min-h-screen">
       <div className="max-w-7xl mx-auto">
-        <div className="gallery-header mb-16 text-center max-w-2xl mx-auto">
+        <div className="gallery-header mb-12 text-center max-w-2xl mx-auto">
           <h2 className="text-xs uppercase tracking-[0.3em] text-brand-primary mb-6 font-medium">
             Visual Journey
           </h2>
@@ -112,10 +121,30 @@ const Gallery = () => {
           </p>
         </div>
 
+        {/* SWITCHER / FILTER */}
+        <div className="flex justify-center mb-16">
+          <div className="bg-white/50 backdrop-blur-md p-1.5 rounded-2xl border border-white flex gap-1 shadow-sm">
+            {["all", "photos", "videos"].map((type) => (
+              <button
+                key={type}
+                onClick={() => setFilter(type)}
+                className={`px-8 py-2.5 rounded-xl text-[10px] uppercase tracking-widest font-semibold transition-all duration-300
+                  ${filter === type 
+                    ? "bg-brand-primary text-white shadow-md scale-105" 
+                    : "text-slate-400 hover:text-brand-dark hover:bg-white/80"
+                  }
+                `}
+              >
+                {type}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mediaAssets.map((asset, index) => (
+          {filteredAssets.map((asset, index) => (
             <div
-              key={index}
+              key={`${filter}-${index}`}
               onClick={() => setSelectedAsset(asset)}
               className="gallery-item relative group overflow-hidden rounded-[2rem] aspect-square border border-white/20 shadow-sm cursor-pointer"
             >
@@ -134,7 +163,7 @@ const Gallery = () => {
                     }}
                   />
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
+                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 group-hover:scale-110 transition-transform">
                       <Play size={24} fill="white" />
                     </div>
                   </div>
