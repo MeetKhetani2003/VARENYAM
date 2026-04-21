@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 // SIMPLIFIED MEDIA ASSETS
 // Just add your image or video paths here!
 const mediaAssets = [
+  "",
   "/gallery/WhatsApp Image 2026-04-21 at 10.29.06 AM (1).jpeg",
   "/gallery/WhatsApp Image 2026-04-21 at 10.29.06 AM.jpeg",
   "/gallery/WhatsApp Image 2026-04-21 at 10.29.07 AM (1).jpeg",
