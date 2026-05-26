@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import ContactStrap from "@/components/ContactStrap";
 import Contact from "@/components/Contact";
 import Marquee from "@/components/Marquee";
+import NeuroApproaches from "@/components/NeuroApproaches";
+import PediatricApproaches from "@/components/PediatricApproaches";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { CheckCircle2, MoveRight, ChevronRight } from "lucide-react";
@@ -141,6 +143,10 @@ export default function TreatmentContent({ service }) {
           </div>
         </div>
       </section>
+
+      {/* Render specialized approaches based on service */}
+      {service.id === "neuro-physiotherapy" && <NeuroApproaches />}
+      {service.id === "pediatric-physiotherapy" && <PediatricApproaches />}
 
       {/* Structured CTA */}
       <section className="pb-24 px-6 section-reveal">
