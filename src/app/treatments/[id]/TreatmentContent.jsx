@@ -89,14 +89,14 @@ export default function TreatmentContent({ service }) {
             </div>
             
             <div className="hero-reveal relative">
-              <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
+              <div className="w-full rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white bg-slate-50 flex items-center justify-center">
                 <img 
-                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000" 
+                  src={service.heroImage || "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000"} 
                   alt={service.title}
-                  className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-1000"
+                  className="w-full h-auto object-contain max-h-[80vh] transition-transform duration-1000 hover:scale-[1.02]"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-brand-accent/20 rounded-full blur-3xl" />
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-brand-accent/20 rounded-full blur-3xl pointer-events-none" />
             </div>
           </div>
         </div>
