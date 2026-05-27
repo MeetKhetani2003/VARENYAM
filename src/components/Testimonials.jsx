@@ -1,151 +1,158 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from "react";
-import { Quote, Star } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import React, { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import { Star, BadgeCheck, ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
     name: "Rajesh Kumar",
-    role: "Stroke Recovery Patient",
+    time: "2 weeks ago",
     text: "The personalized care I received at Varenyam was exceptional. Dr. Khushi's expertise in stroke rehab helped me walk again within months.",
-    rating: 5
+    rating: 5,
+    avatarColor: "bg-blue-100 text-blue-600"
   },
   {
     name: "Sneha Patel",
-    role: "Mother of Pediatric Patient",
+    time: "1 month ago",
     text: "Finding a specialist for my son's CP was difficult until we found Varenyam. Their pediatric setup and patient approach are world-class.",
-    rating: 5
+    rating: 5,
+    avatarColor: "bg-green-100 text-green-600"
   },
   {
     name: "Amit Shah",
-    role: "SCI Rehabilitation",
+    time: "3 months ago",
     text: "Evidence-based therapy and professional guidance. They focus on functional independence which was exactly what I needed.",
-    rating: 5
+    rating: 5,
+    avatarColor: "bg-amber-100 text-amber-600"
   },
   {
     name: "Priya Sharma",
-    role: "Parkinson's Care",
+    time: "4 months ago",
     text: "Varenyam has significantly improved my mobility and quality of life. The clinical environment is very supportive.",
-    rating: 5
+    rating: 5,
+    avatarColor: "bg-purple-100 text-purple-600"
   },
   {
     name: "Vikram Mehta",
-    role: "Post-Surgical Rehab",
+    time: "5 months ago",
     text: "The team here is incredible. They understood my specific limitations and pushed me safely toward full recovery.",
-    rating: 5
+    rating: 5,
+    avatarColor: "bg-rose-100 text-rose-600"
   }
 ];
 
+const GoogleIcon = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+  </svg>
+);
+
 const Testimonials = () => {
-  const containerRef = useRef(null);
-  const sliderRef = useRef(null);
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: "start", skipSnaps: false },
+    [Autoplay({ delay: 5000, stopOnInteraction: true })]
+  );
 
-  useLayoutEffect(() => {
-    if (!containerRef.current || !sliderRef.current) return;
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
 
-    const ctx = gsap.context(() => {
-      // Calculate total width of one set of testimonials
-      const totalWidth = sliderRef.current.scrollWidth / 3; // divided by 3 because we tripled the items
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
 
-      const animation = gsap.to(sliderRef.current, {
-        x: `-=${totalWidth}`,
-        duration: 30,
-        ease: "none",
-        repeat: -1,
-        onReverseComplete: () => {
-          gsap.set(sliderRef.current, { x: 0 });
-        }
-      });
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
 
-      containerRef.current.addEventListener("mouseenter", () => animation.pause());
-      containerRef.current.addEventListener("mouseleave", () => animation.play());
-
-      gsap.fromTo(".testimonial-header", 
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 10%",
-          }
-        }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  // Triple the array for seamless infinite looping
-  const loopedItems = [...testimonials, ...testimonials, ...testimonials];
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+  }, [emblaApi, onSelect]);
 
   return (
-    <section ref={containerRef} className="py-12 px-6 bg-brand-muted/30 overflow-hidden">
-      <div className="max-w-7xl mx-auto mb-10">
-        <div className="testimonial-header max-w-2xl">
-          <h2 className="text-[11px] uppercase tracking-[0.4em] text-brand-primary mb-3 font-semibold">Success Stories</h2>
-          <h3 className="text-2xl md:text-3xl font-semibold text-brand-dark mb-4 tracking-tighter">Voices of <span className="text-brand-primary italic">Recovery.</span></h3>
-          <p className="text-base text-slate-500 font-normal leading-relaxed">
-            Restoring hope and independence through precision neuro-rehabilitation.
-          </p>
-        </div>
-      </div>
-
-      {/* Infinite Slider Container */}
-      <div className="relative w-full overflow-hidden select-none">
-        <div 
-          ref={sliderRef}
-          className="flex gap-6 w-max"
-        >
-          {loopedItems.map((t, index) => (
-            <div 
-              key={index} 
-              className="w-[85vw] md:w-[calc(33.333vw-24px)] lg:w-[calc(33.333vw-48px)] flex-shrink-0"
+    <section className="py-24 px-6 bg-slate-50 overflow-hidden relative">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2 mb-4">
+              <GoogleIcon />
+              <span className="text-sm font-semibold text-slate-700">Google Verified Reviews</span>
+              <BadgeCheck className="w-4 h-4 text-blue-500" />
+            </div>
+            <h2 className="text-3xl md:text-5xl font-semibold text-slate-900 tracking-tight">
+              Hear from our <span className="text-brand-primary italic">Patients.</span>
+            </h2>
+            <p className="text-lg text-slate-500 mt-4 font-normal leading-relaxed">
+              Real stories of recovery and renewed independence from people who trusted Varenyam.
+            </p>
+          </div>
+          
+          <div className="flex gap-3">
+            <button 
+              onClick={scrollPrev}
+              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-white hover:shadow-md transition-all duration-300 disabled:opacity-50"
+              aria-label="Previous testimonial"
             >
-              <div className="bg-white p-6 md:p-6 rounded-[1.5rem] border border-slate-100 shadow-sm relative h-full  flex flex-col justify-between hover:border-brand-primary/20 transition-colors duration-300">
-                <div className="absolute top-6 right-6 text-brand-primary/10">
-                  <Quote size={32} />
-                </div>
-                
-                <div>
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button 
+              onClick={scrollNext}
+              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-white hover:shadow-md transition-all duration-300 disabled:opacity-50"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Carousel */}
+        <div className="overflow-hidden -mx-6 px-6 sm:mx-0 sm:px-0" ref={emblaRef}>
+          <div className="flex gap-6">
+            {testimonials.map((t, index) => (
+              <div 
+                key={index} 
+                className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_45%] lg:flex-[0_0_30%]"
+              >
+                <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] h-full flex flex-col hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] transition-shadow duration-300">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${t.avatarColor}`}>
+                        {t.name[0]}
+                      </div>
+                      <div>
+                        <h4 className="text-base font-semibold text-slate-900">{t.name}</h4>
+                        <p className="text-sm text-slate-500">{t.time}</p>
+                      </div>
+                    </div>
+                    <GoogleIcon />
+                  </div>
+                  
                   <div className="flex gap-1 mb-4">
                     {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} size={12} className="fill-brand-accent text-brand-accent" />
+                      <Star key={i} size={16} className="fill-[#FBBC05] text-[#FBBC05]" />
                     ))}
                   </div>
 
-                  <p className="text-sm text-brand-dark font-medium leading-relaxed mb-6 italic">
+                  <p className="text-base text-slate-700 leading-relaxed">
                     "{t.text}"
                   </p>
                 </div>
-
-                <div className="pt-6 border-t border-slate-50 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-brand-muted flex items-center justify-center text-brand-primary font-bold text-base border border-brand-primary/5">
-                    {t.name[0]}
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-semibold text-brand-dark">{t.name}</h4>
-                    <p className="text-[9px] text-brand-primary font-bold uppercase tracking-widest mt-0.5">{t.role}</p>
-                  </div>
-                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-        
-        {/* Subtle Side Fades for Premium Look */}
-        <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-brand-muted/30 to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-brand-muted/30 to-transparent z-10 pointer-events-none" />
       </div>
     </section>
   );
 };
 
 export default Testimonials;
+

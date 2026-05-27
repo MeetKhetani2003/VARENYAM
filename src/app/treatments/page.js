@@ -206,7 +206,7 @@ export default function ServicesPage() {
 
             <div className="w-full lg:w-1/2">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-brand-dark/5 bg-white p-4">
-                <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-brand-muted/10">
+                <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-brand-muted/10">
                   <Image
                     src="/neuroplasticity-infographic.png"
                     alt="Neuroplasticity - How the brain changes with learning and experience"
@@ -275,7 +275,7 @@ export default function ServicesPage() {
 
             <div className="w-full lg:w-1/2">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-brand-dark/5 bg-white p-4 group">
-                <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-brand-muted/10">
+                <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-brand-muted/10">
                   <Image 
                     src="/learning-neuron.png"
                     alt="Neuron Learning Process - Before and After"
@@ -330,9 +330,9 @@ export default function ServicesPage() {
 
             <div className="w-full lg:w-1/2">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-brand-dark/5 bg-white p-4 group">
-                <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-brand-muted/10">
+                <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-brand-muted/10">
                   <Image 
-                    src="/neurotransmitters-infographic.jpg"
+                    src="/neurotransmitters-infographic.png"
                     alt="Meet Your Neurotransmitters"
                     fill
                     className="object-contain transition-transform duration-700 group-hover:scale-[1.02]"
@@ -384,7 +384,7 @@ export default function ServicesPage() {
 
             <div className="w-full lg:w-1/2">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-brand-dark/5 bg-white p-4 group">
-                <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-brand-muted/10">
+                <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-brand-muted/10">
                   <Image 
                     src="/brain-trauma-infographic.png"
                     alt="Brain Changes & Trauma"
