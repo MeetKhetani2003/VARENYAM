@@ -76,7 +76,7 @@ const About = () => {
               <div className="bg-white border border-slate-100 rounded-[3rem] p-12 shadow-2xl shadow-slate-100 relative">
                 <div className="w-24 h-24 bg-slate-100 rounded-3xl mb-8 overflow-hidden">
                    <img 
-                    src="https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80&w=300" 
+                    src="/doctor.jpeg" 
                     alt="Dr. Khushi Joshi"
                     className="w-full h-full object-cover"
                    />
