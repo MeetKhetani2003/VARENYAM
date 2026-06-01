@@ -8,6 +8,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import Testimonials from "@/components/Testimonials";
 import ContactStrap from "@/components/ContactStrap";
 import Contact from "@/components/Contact";
+import GalleryCarousel from "@/components/GalleryCarousel";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <ServicesPreview />
       <ConditionsFAQ />
       <WhyChooseUs />
+      <GalleryCarousel />
       <Testimonials />
       <ContactStrap />
       <Contact />

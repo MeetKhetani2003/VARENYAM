@@ -74,11 +74,11 @@ const About = () => {
             <div className="relative group">
               <div className="absolute inset-0 bg-brand-primary/5 rounded-[3rem] rotate-2 scale-105 group-hover:rotate-0 transition-transform duration-700" />
               <div className="bg-white border border-slate-100 rounded-[3rem] p-12 shadow-2xl shadow-slate-100 relative">
-                <div className="w-24 h-24 bg-slate-100 rounded-3xl mb-8 overflow-hidden">
+                <div className="w-full h-72 bg-slate-100 rounded-3xl mb-8 overflow-hidden">
                    <img 
-                    src="/doctor.jpeg" 
+                    src="/doctor.png" 
                     alt="Dr. Khushi Joshi"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover "
                    />
                 </div>
                 
@@ -96,13 +96,9 @@ const About = () => {
                   </div>
                 </div>
 
-                <p className="text-slate-400 text-sm leading-relaxed mb-10 italic font-light">
+                <p className="text-slate-400 text-sm leading-relaxed italic font-light">
                   "Expertise in stroke rehab, cerebral palsy, developmental disorders, and advanced neurorehabilitation techniques."
                 </p>
-
-                <button className="w-full border border-slate-200 text-slate-600 py-4 rounded-full text-[10px] uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-all">
-                  View Credentials
-                </button>
               </div>
             </div>
           </div>
