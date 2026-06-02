@@ -16,42 +16,42 @@ const pediatricApproaches = [
     title: "Bobath / NDT",
     tagline: "Helping your child move with confidence and control.",
     description: "We gently guide your child’s body to learn better posture and movement—making everyday activities like sitting, standing, and walking easier and more natural.",
-    image: "/treatments/pedeatric/treat1.png"
+    image: "/treatments/pedeatric/treat1.jpeg"
   },
   {
     id: 2,
     title: "Rood’s Sensory–Motor Approach",
     tagline: "Activating muscles. Calming movement. Restoring balance.",
     description: "Using simple touch techniques like tapping and vibration, we help muscles either “wake up” or relax—so your child can move more smoothly.",
-    image: "/treatments/pedeatric/treat2.png"
+    image: "/treatments/pedeatric/treat2.jpeg"
   },
   {
     id: 3,
     title: "Sensory Integration (SI)",
     tagline: "Where play becomes powerful therapy.",
     description: "Through fun activities like swings and balance play, we help your child’s brain better understand their body—improving focus, behavior, and coordination.",
-    image: "/treatments/pedeatric/treat3.png"
+    image: "/treatments/pedeatric/treat3.jpeg"
   },
   {
     id: 4,
     title: "Motor Learning / Task-Oriented Approach",
     tagline: "Learning by doing, growing with confidence.",
     description: "We practice real-life activities like reaching, walking, and playing—helping your child become more independent in daily life.",
-    image: "/treatments/pedeatric/treat4.png"
+    image: "/treatments/pedeatric/treat4.jpeg"
   },
   {
     id: 5,
     title: "Developmental Sequence Approach",
     tagline: "Building strong foundations, one step at a time.",
     description: "We follow your child’s natural growth journey—rolling, sitting, crawling, and walking—to ensure each milestone is strong and stable.",
-    image: "/treatments/pedeatric/treat5.png"
+    image: "/treatments/pedeatric/treat5.jpeg"
   },
   {
     id: 6,
     title: "Neuro-Sequential Model",
     tagline: "Calm mind first, better learning next.",
     description: "We focus on helping your child feel safe and regulated first—because a calm brain learns, behaves, and moves better.",
-    image: "/treatments/pedeatric/treat6.png"
+    image: "/treatments/pedeatric/treat6.jpeg"
   }
 ];
 
