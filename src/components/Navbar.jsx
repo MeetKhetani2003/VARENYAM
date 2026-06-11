@@ -144,14 +144,14 @@ const Navbar = () => {
 
         <div className="p-10 bg-slate-50 mt-auto border-t border-slate-100 space-y-8">
           <div className="space-y-4">
-            <div className="flex items-center gap-4 text-slate-500">
+            <a href="tel:+917021639972" className="flex items-center gap-4 text-slate-500 hover:text-brand-primary transition-colors">
               <Phone size={16} className="text-brand-primary" />
-              <span className="text-xs font-normal">+91 12345 67890</span>
-            </div>
-            <div className="flex items-center gap-4 text-slate-500">
+              <span className="text-xs font-normal">+91 70216 39972</span>
+            </a>
+            <a href="mailto:varenyamneurocare@gmail.com" className="flex items-center gap-4 text-slate-500 hover:text-brand-primary transition-colors">
               <Mail size={16} className="text-brand-primary" />
-              <span className="text-xs font-normal">info@varenyamneuro.com</span>
-            </div>
+              <span className="text-xs font-normal">varenyamneurocare@gmail.com</span>
+            </a>
           </div>
           
           <Link

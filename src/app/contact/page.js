@@ -80,19 +80,24 @@ export default function ContactPage() {
           {/* Contact Methods */}
           <div className="space-y-1">
             {[
-              { icon: Phone, label: "Phone", value: "+91 12345 67890" },
-              { icon: Mail, label: "Email", value: "info@varenyamneuro.com" },
-              { icon: MapPin, label: "Location", value: "G-46, Ganesh Square Complex, Ankleshwar" }
+              { icon: Phone, label: "Phone", value: "+91 70216 39972", href: "tel:+917021639972" },
+              { icon: Mail, label: "Email", value: "varenyamneurocare@gmail.com", href: "mailto:varenyamneurocare@gmail.com" },
+              { icon: MapPin, label: "Location", value: "G-46, Ganesh Square Complex, Ankleshwar", href: "https://maps.google.com/?q=G-46,+Ganesh+Square+Complex,+Ankleshwar" }
             ].map((item, i) => (
-              <div key={i} className="contact-card flex gap-6 items-center p-10 bg-white border border-slate-50 hover:bg-brand-muted/30 transition-all duration-500">
-                <div className="w-12 h-12 bg-brand-dark text-white rounded-lg flex items-center justify-center shadow-sm">
+              <a 
+                key={i} 
+                href={item.href}
+                {...(item.label === "Location" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="contact-card flex gap-6 items-center p-10 bg-white border border-slate-50 hover:bg-brand-muted/30 transition-all duration-500 group/card"
+              >
+                <div className="w-12 h-12 bg-brand-dark text-white rounded-lg flex items-center justify-center shadow-sm group-hover/card:bg-brand-primary transition-colors duration-500">
                   <item.icon size={20} />
                 </div>
                 <div>
                   <p className="text-[9px] uppercase tracking-widest text-brand-primary font-bold mb-1">{item.label}</p>
-                  <p className="text-base text-brand-dark font-medium">{item.value}</p>
+                  <p className="text-base text-brand-dark font-medium group-hover/card:text-brand-primary transition-colors duration-500">{item.value}</p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
 

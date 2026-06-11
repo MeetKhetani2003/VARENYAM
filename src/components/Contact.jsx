@@ -24,7 +24,7 @@ const Contact = () => {
               Specialized neurorehabilitation center providing evidence-based precision care and pediatric excellence in Ankleshwar.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-all">
+              <a href="https://www.instagram.com/varenyam_neurocare?igsh=bWRpaGVzOHpndWw3" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-all">
                 <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               </a>
               <a href="#" className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-all">
@@ -56,24 +56,24 @@ const Contact = () => {
             <h4 className="text-[11px] uppercase tracking-[0.3em] font-bold text-brand-primary mb-8">Clinical Inquiry</h4>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-primary flex-shrink-0">
+                <a href="tel:+917021639972" className="flex gap-4 group/contact-item">
+                  <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-primary flex-shrink-0 group-hover/contact-item:bg-brand-primary group-hover/contact-item:text-white group-hover/contact-item:border-brand-primary transition-all">
                     <Phone size={18} />
                   </div>
                   <div>
                     <p className="text-[9px] uppercase tracking-widest text-slate-400 mb-1">Phone</p>
-                    <p className="text-[13px] text-brand-dark font-medium">+91 12345 67890</p>
+                    <p className="text-[13px] text-brand-dark font-medium group-hover/contact-item:text-brand-primary transition-colors">+91 70216 39972</p>
                   </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-primary flex-shrink-0">
+                </a>
+                <a href="mailto:varenyamneurocare@gmail.com" className="flex gap-4 group/contact-item">
+                  <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-primary flex-shrink-0 group-hover/contact-item:bg-brand-primary group-hover/contact-item:text-white group-hover/contact-item:border-brand-primary transition-all">
                     <Mail size={18} />
                   </div>
                   <div>
                     <p className="text-[9px] uppercase tracking-widest text-slate-400 mb-1">Email</p>
-                    <p className="text-[13px] text-brand-dark font-medium">info@varenyamneuro.com</p>
+                    <p className="text-[13px] text-brand-dark font-medium group-hover/contact-item:text-brand-primary transition-colors">varenyamneurocare@gmail.com</p>
                   </div>
-                </div>
+                </a>
               </div>
               <div className="flex gap-4">
                 <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-brand-primary flex-shrink-0">
